@@ -1,3 +1,2 @@
-spring:
-  profiles:
-    active: native
+encrypt:
+  key: secret_key
