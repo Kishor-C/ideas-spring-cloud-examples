@@ -18,4 +18,9 @@ public class AccountController {
 	public Transaction debitApi(@PathVariable("accountNumber") int accountNumber, @PathVariable("amount") double amount) {
 		return service.debit(accountNumber, amount);
 	}
+	
+	@GetMapping("{name}")
+	public String greetings(@PathVariable("name") String name) {
+		return "Greetings from Account, Hello: "+name;
+	}
 }

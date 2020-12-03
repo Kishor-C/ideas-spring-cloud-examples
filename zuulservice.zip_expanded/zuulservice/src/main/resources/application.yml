@@ -1,0 +1,15 @@
+server:
+  port: 5555
+
+eureka:  client:    register-with-eureka: true
+    fetch-registry: true
+
+management:  endpoints:    web:      exposure:        include: "*"
+
+zuul:
+  ignored-services: "*"
+  prefix: /api  routes:    wallet-service-app: /wallet/**
+    account-service-app: /bank-account/**
+    
+    
+    
