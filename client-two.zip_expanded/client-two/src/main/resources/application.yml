@@ -12,4 +12,4 @@ resilience4j:  circuitbreaker:    instances:      fetchDefaultService:
         record-exceptions:          - java.io.IOException
           - org.springframework.web.client.ResourceAccessException
           - java.util.concurrent.TimeoutException
-        
+       
