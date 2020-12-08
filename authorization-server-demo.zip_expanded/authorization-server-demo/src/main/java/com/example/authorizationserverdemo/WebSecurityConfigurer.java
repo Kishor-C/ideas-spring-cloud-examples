@@ -13,6 +13,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	// defines users, their passwords & roles
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
 		auth.inMemoryAuthentication()
 		.withUser("kishor.c").password("{noop}kishor123").roles("ADMIN", "USER")
 		.and()

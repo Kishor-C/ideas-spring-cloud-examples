@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 // Register the client application to use the protected resource
 // here client application gives username & password that end-users will not be knowing
@@ -19,6 +21,12 @@ public class OAuth2 extends AuthorizationServerConfigurerAdapter {
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private TokenStore tokenStore;
+	
+	@Autowired
+	private JwtAccessTokenConverter jwtAccessTokenConverter;
 
 	// this configures the client application details
 	@Override
@@ -33,7 +41,11 @@ public class OAuth2 extends AuthorizationServerConfigurerAdapter {
 	// this configures the object required for authentication i.e, client and user information
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.authenticationManager(authenticationManager).userDetailsService(userDetailsService);
+		endpoints
+		.tokenStore(tokenStore)
+		.accessTokenConverter(jwtAccessTokenConverter)
+		.authenticationManager(authenticationManager)
+		.userDetailsService(userDetailsService);
 	}
 
 }
